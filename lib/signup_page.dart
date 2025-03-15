@@ -1,46 +1,52 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
 
-  Future<void> _login() async {
+  Future<void> _signup() async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      await _auth.signInWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
       if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Sign Up SuccessFull'), backgroundColor: Colors.green,));
         Navigator.pushReplacementNamed(context, '/home');
+         
       }
     } on FirebaseAuthException catch (e) {
-      String errorMessage = 'Login failed. Please try again.';
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        errorMessage = 'Invalid email or password.';
+      String errorMessage = 'Sign-up failed. Please try again.';
+      if (e.code == 'email-already-in-use') {
+        errorMessage = 'The email address is already in use.';
+      } else if (e.code == 'weak-password') {
+        errorMessage = 'The password is too weak.';
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMessage)),
+          SnackBar(content: Text(errorMessage),backgroundColor: Colors.red,),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An unexpected error occurred: ${e.toString()}')),
+          SnackBar(content: Text('An unexpected error occurred: ${e.toString()}'),backgroundColor: Colors.red,),
         );
       }
     } finally {
@@ -63,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Sign Up"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -92,18 +98,18 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: _isLoading ? null : _login,
+                onPressed: _isLoading ? null : _signup,
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text("Login"),
+                    : const Text("Sign Up"),
               ),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/signup');
+                Navigator.pushReplacementNamed(context, '/');
               },
-              child: const Text("Don't have an account? Sign Up"),
+              child: const Text("Already have an account? Login"),
             ),
           ],
         ),

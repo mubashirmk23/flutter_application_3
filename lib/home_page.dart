@@ -16,7 +16,11 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.logout),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.pushReplacementNamed(context, '/login');
+               ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Your logged out'),backgroundColor: Colors.green,),
+        );
+              Navigator.pushReplacementNamed(context, '/');
+           
             },
           ),
         ],
