@@ -17,24 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -64,6 +55,33 @@ class DefaultFirebaseOptions {
     projectId: 'authnew-a3927',
     authDomain: 'authnew-a3927.firebaseapp.com',
     storageBucket: 'authnew-a3927.firebasestorage.app',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAnRN-nZXmjvTsAWxGAEfdYrSXxGpRsGEw',
+    appId: '1:160288392531:web:4da3d078f9a23395df4da6',
+    messagingSenderId: '160288392531',
+    projectId: 'authnew-a3927',
+    authDomain: 'authnew-a3927.firebaseapp.com',
+    storageBucket: 'authnew-a3927.firebasestorage.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCOR9doBVTlk0FwLlpTVOaxHsovKXq4V2Q',
+    appId: '1:160288392531:ios:f42c1839e85b724adf4da6',
+    messagingSenderId: '160288392531',
+    projectId: 'authnew-a3927',
+    storageBucket: 'authnew-a3927.firebasestorage.app',
+    iosBundleId: 'com.example.flutterApplication3',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCOR9doBVTlk0FwLlpTVOaxHsovKXq4V2Q',
+    appId: '1:160288392531:ios:f42c1839e85b724adf4da6',
+    messagingSenderId: '160288392531',
+    projectId: 'authnew-a3927',
+    storageBucket: 'authnew-a3927.firebasestorage.app',
+    iosBundleId: 'com.example.flutterApplication3',
   );
 
 }
