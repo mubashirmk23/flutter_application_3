@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "160288392531",
+    "project_id": "authnew-a3927",
+    "storage_bucket": "authnew-a3927.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160288392531:android:2fcec758e82482a0df4da6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3QHBPI4bVTWW4vSXY_Hvgm8RCX0JlBCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
